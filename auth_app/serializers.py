@@ -4,11 +4,6 @@ from .models import UserProfile, Role, BusinessElement, AccessRule
 from django.contrib.auth.password_validation import validate_password
 import bcrypt
 
-
-
-
-
-
 class UserSerializer(serializers.ModelSerializer):
     # Сериализатор для модели Юзера
     password = serializers.CharField(write_only=True, required=True, validators=[validate_password])
@@ -81,7 +76,7 @@ class BusinessElementSerializer(serializers.ModelSerializer):
         read_only_fields = ('created_at',)
 
 
-class AccesRuleSerializer(serializers.ModelSerializer):
+class AccessRuleSerializer(serializers.ModelSerializer):
     # сериализатор для правил доступа
     role_name = serializers.CharField(source='role.name', read_only=True)
     element_name = serializers.CharField(source='element.name', read_only=True)

@@ -44,6 +44,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+
+    'auth_app.middleware.JWTAuthenticationMiddleware',
 ]
 
 ROOT_URLCONF = 'auth_system.urls'
@@ -119,6 +121,29 @@ STATIC_URL = 'static/' # url статики
 STATIC_ROOT = BASE_DIR / 'staticfiles' # путь для всех файлов статики
 
 
+
+# Настройки REST Framework
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        
+    ],
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.IsAuthenticated',
+    ],
+    'DEFAULT_RENDERER_CLASSES': [
+        'rest_framework.renderers.JSONRenderer',
+    ],
+    'DEFAULT_PARSER_CLASSES': [
+        'rest_framework.parsers.JSONParser',
+        'rest_framework.parsers.FormParser',
+        'rest_framework.parsers.MultiPartParser',
+    ],
+    'DEFAULT_SCHEMA_CLASS': 'rest_framework.schemas.coreapi.AutoSchema',
+    'DATETIME_FORMAT': '%Y-%m-%d %H:%M:%S',
+}
+
+
 SECURE_BROWSER_XSS_FILTER = True  # Защита от XSS-атак
 SECURE_CONTENT_TYPE_NOSNIFF = True  # Запрет MIME-типов
 X_FRAME_OPTIONS = 'DENY'  # Защита от кликджекинга
+
